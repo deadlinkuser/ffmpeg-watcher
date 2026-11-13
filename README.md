@@ -1,6 +1,6 @@
 # FFmpeg Watcher (Automated Podman Video Transcoder)
 
-An automated, containerized FFmpeg watch-folder pipeline built for rootless Podman on Debian Linux. Drop video files (or entire nested season folders) into your **Watch** folder, and a background worker automatically converts, validates, and saves clean, space-saving Matroska (`.mkv`) files into your **Output** folder.
+An automated, containerized FFmpeg watch-folder pipeline built for rootless Podman on Debian Linux. Drop video files (or entire nested season folders) into your **Watch** folder, and a background worker automatically converts, validates, and saves clean, space-saving Matroska (`.mkv`) files into your **Output** folder. DISCLOSURE - AI was used heavily in creating this repo as well as testing and modifying my personal container for use on other systems.
 
 ---
 
