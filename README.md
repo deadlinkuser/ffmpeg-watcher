@@ -1,22 +1,33 @@
-# FFmpeg Watcher (Podman Automated Media Transcoder)
+# FFmpeg Watcher (Automated Podman Video Transcoder)
 
-An automated, containerized FFmpeg watch-folder pipeline built for rootless Podman on Debian Linux. Drop video files or nested season folders into your watch folder, and the container automatically analyzes, transcodes, validates, and organizes clean Matroska (`.mkv`) outputs.
+An automated, containerized FFmpeg watch-folder pipeline built for rootless Podman on Debian Linux. Drop video files (or entire nested season folders) into your **Watch** folder, and a background worker automatically converts, validates, and saves clean, space-saving Matroska (`.mkv`) files into your **Output** folder.
 
 ---
 
 ## 🚀 Quick Install (One-Line Command)
 
-Copy and paste this command into your Debian terminal to set up your folders, scripts, and Podman container interactively:
+> **Prerequisite:** Make sure Podman is installed on your Debian machine (`sudo apt update && sudo apt install -y podman`).
+
+Open your terminal (as your normal user—**do not use `sudo`**), copy and paste the command below, and press **Enter**:
 
 ```bash
-bash <(curl -fsSL https://githubusercontent.com)
+G="github"; U="Gusercontent.com"; bash <(curl -fsSL "https://raw.{U}/deadlinkuser/ffmpeg-watcher/refs/heads/main/install.sh")
 ```
 
-During setup, the installer safely configures everything inside your own `$HOME` directory and lets you:
-1. Choose a custom **container name** (defaults to `ffmpeg-watcher`).
-2. Choose custom **Watch** and **Output** folder paths (defaults to `~/ffmpeg-watcher/watch` and `~/ffmpeg-watcher/output`).
-3. Automatically configure a **CPU core limit** if you have 16+ CPU threads so your desktop stays responsive.
-4. Optionally add a clickable **Test FFmpeg Watcher** icon to your Desktop (on XFCE/graphical desktops).
+### What Happens During Setup
+The setup wizard walks you through 4 simple questions. **You can simply press `Enter` at every prompt** to accept the recommended defaults inside your own home folder:
+1. **Container Name:** Defaults to `ffmpeg-watcher` (or enter any custom name).
+2. **Watch & Output Folders:** Defaults to `~/ffmpeg-watcher/watch` and `~/ffmpeg-watcher/output`.
+3. **CPU Performance:** If your PC has **16 or more CPU threads**, the wizard offers to cap container CPU usage (e.g., `total threads - 2`) so your desktop stays responsive while videos encode.
+4. **Desktop Test Shortcut:** On XFCE/graphical desktops, offers to place a clickable **Test FFmpeg Watcher** icon on your Desktop.
+
+---
+
+## 📂 How to Use It Daily
+
+1. **Drop videos in:** Copy or move video files (or nested show/season folders) into your **Watch** folder (`~/ffmpeg-watcher/watch`).
+2. **Wait for automatic conversion:** The background worker detects new files once they finish copying, converts them, and places the finished `.mkv` files into your **Output** folder (`~/ffmpeg-watcher/output`) with the exact same folder structure.
+3. **Automatic cleanup:** Once an output file passes validation, the original file in **Watch** is removed and empty subfolders are cleaned up. If a file is corrupted or unreadable, it is safely moved to `watch/_failed` so it never blocks the queue.
 
 ---
 
@@ -37,9 +48,21 @@ During setup, the installer safely configures everything inside your own `$HOME`
 
 ---
 
-## 🧪 Automated Verification Suite
+## 🧪 Built-In Automated Verification Suite
 
-The installer includes **`test-watcher.sh`**, an automated verification tool that tests codecs, passthrough, language filtering, special characters, corrupt-file quarantine, and graceful container stops—automatically checking container logs and output files for `PASS` / `FAIL` results.
+Want to make sure everything works before dropping in your real media? Run the built-in test suite, which generates sample videos, tests every feature above, and automatically checks container logs and output folders for `PASS` / `FAIL` results:
 
-* **XFCE / Graphical Desktop Users:** Double-click the **Test FFmpeg Watcher** icon on your Desktop for a step-by-step GUI wizard (requires `zenity`).
-* **GNOME / KDE / Headless Debian Users:** Run `~/.local/share/ffmpeg-watcher/test-watcher.sh <container_name>` in your terminal for an interactive CLI test runner.
+* **XFCE / Graphical Desktop Users:** Double-click the **Test FFmpeg Watcher** icon on your Desktop (uses `zenity` GUI popups if installed, or runs in terminal).
+* **GNOME / KDE / Headless Debian Users:** Run this in your terminal:
+  ```bash
+  ~/.local/share/ffmpeg-watcher/test-watcher.sh ffmpeg-watcher
+  ```
+
+---
+
+## 🛠️ Useful Podman Commands
+
+* **View live encoding progress:** `podman logs -f ffmpeg-watcher`
+* **Stop the background worker:** `podman stop ffmpeg-watcher`
+* **Start the background worker:** `podman start ffmpeg-watcher`
+* **Remove the container:** `podman rm -f ffmpeg-watcher`
