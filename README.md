@@ -8,7 +8,11 @@ An automated, containerized FFmpeg watch-folder pipeline built for rootless Podm
 
 > **Prerequisite:** Make sure Podman is installed on your Debian machine (`sudo apt update && sudo apt install -y podman`).
 
-Open your terminal (as your normal user—**do not use `sudo`**), copy and paste the command below, and press **Enter**:
+
+
+> [!CAUTION]
+> **Do not use `sudo`** when running this command.
+Open your terminal (as your normal user—**DO NOT use `sudo`**), copy and paste the command below, and press **Enter**:
 
 ```bash
 G="github"; U="$Gusercontent.com"; bash <(curl -fsSL "https://raw.${U}/deadlinkuser/ffmpeg-watcher/refs/heads/main/install.sh")
