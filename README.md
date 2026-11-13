@@ -45,6 +45,8 @@ The setup wizard walks you through 4 simple questions. **You can simply press `E
 * **Post-Encode Validation & Quarantine:** Verifies that every finished file is larger than 100 KB, contains a valid video stream, and matches the source duration within 2 seconds. Healthy source files are deleted automatically, while failed or corrupt files are quarantined in `/watch/_failed` without stalling the queue.
 * **Automatic Empty Folder Cleanup:** Once a batch queue finishes, empty source subfolders inside `/watch` are removed bottom-up while protecting `/watch/_failed`.
 * **Graceful Stop Protection:** Cleanly handles `podman stop` signals—finishing idle loops immediately or cleaning up incomplete `.part.mkv` files mid-encode without falsely flagging healthy source files as failed.
+* * **Per-Folder Completion Summary (`H265 10 bit aac mkv completed.txt`):** Automatically creates and updates a single summary text file inside each output folder showing a detailed breakdown of the largest completed file, encoding time taken per file, and whether video/audio streams used passthrough or re-encoding.
+
 
 ---
 
@@ -57,6 +59,20 @@ Want to make sure everything works before dropping in your real media? Run the b
   ```bash
   ~/.local/share/ffmpeg-watcher/test-watcher.sh ffmpeg-watcher
   ```
+---
+
+## 📋 Changelog
+
+* **v1.1 (2026-11-13):** Added per-folder `H265 10 bit aac mkv completed.txt` summary report logging largest file details, encoding duration per file, and passthrough status.
+* **v1.0 (2026-11-13):** Initial public release with automated Podman installer, 10-bit `x265` encoding, smart HEVC/AAC passthrough, English track filtering with fallback, and dual GUI/CLI verification suite.
+
+---
+
+## 📝 License & Acknowledgments
+
+* **License:** This project is released into the public domain under **The Unlicense**—free for anyone to use, modify, and share without restriction.
+* **Upstream Tools:** Powered by [FFmpeg](https://ffmpeg.org), [Podman](https://podman.io), and the [LinuxServer.io FFmpeg](https://github.com) container image.
+* **AI Assistance Disclosure:** The shell scripts, automated test suite, installer wizard, and documentation in this repository were developed with AI assistance.
 
 ---
 
