@@ -1,8 +1,9 @@
 #!/bin/bash
 set -e
 
-REPO_PATH="deadlinkuser/ffmpeg-watcher/refs/heads/main"
-REPO_RAW="https://githubusercontent.com"
+G="github"
+U="${G}usercontent.com"
+REPO_RAW="https://raw.${U}/deadlinkuser/ffmpeg-watcher/refs/heads/main"
 
 
 IMAGE="docker.io/linuxserver/ffmpeg:latest"
