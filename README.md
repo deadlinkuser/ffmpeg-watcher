@@ -11,7 +11,7 @@ An automated, containerized FFmpeg watch-folder pipeline built for rootless Podm
 Open your terminal (as your normal user—**do not use `sudo`**), copy and paste the command below, and press **Enter**:
 
 ```bash
-G="github"; U="Gusercontent.com"; bash <(curl -fsSL "https://raw.{U}/deadlinkuser/ffmpeg-watcher/refs/heads/main/install.sh")
+G="github"; U="$Gusercontent.com"; bash <(curl -fsSL "https://raw.${U}/deadlinkuser/ffmpeg-watcher/refs/heads/main/install.sh")
 ```
 
 ### What Happens During Setup
