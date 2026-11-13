@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 
-REPO_RAW="https://githubusercontent.com"
+REPO_RAW="https://github.com"
+
 IMAGE="docker.io/linuxserver/ffmpeg:latest"
 
 echo "=================================================================="
